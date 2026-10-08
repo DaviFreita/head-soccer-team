@@ -1,0 +1,1521 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap"
+);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Baloo 2", sans-serif;
+
+  background:
+    radial-gradient(circle at top,
+      #527ff1,
+      #183f9a 70%);
+
+  user-select: none;
+}
+
+button {
+  font-family: inherit;
+  touch-action: none;
+}
+
+.page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.game-shell {
+  position: relative;
+
+  width: min(1180px, 100%);
+
+  min-height: 720px;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(#68a3f5 0%,
+      #4c78d6 37%,
+      #28a743 38%,
+      #0a7c34 100%);
+
+  border:
+    5px solid rgba(255,
+      255,
+      255,
+      0.55);
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+/* ESTÁDIO */
+
+.stadium-bg {
+  position: absolute;
+  inset: 0 0 270px;
+
+  overflow: hidden;
+}
+
+.stadium-roof {
+  position: absolute;
+
+  width: 130%;
+  height: 450px;
+
+  left: -15%;
+  top: -240px;
+
+  border-radius: 50%;
+
+  border:
+    12px solid rgba(255,
+      255,
+      255,
+      0.65);
+
+  box-shadow:
+    0 20px 0 rgba(31,
+      73,
+      164,
+      0.65),
+    0 40px 0 rgba(255,
+      255,
+      255,
+      0.15);
+}
+
+.crowd {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  height: 110px;
+
+  background:
+    radial-gradient(circle,
+      #edf4ff 1px,
+      transparent 2px);
+
+  background-size:
+    11px 11px;
+
+  opacity: 0.4;
+}
+
+.crowd-one {
+  top: 130px;
+}
+
+.crowd-two {
+  top: 220px;
+}
+
+/* LUZES */
+
+.stadium-light {
+  position: absolute;
+
+  top: 38px;
+
+  width: 120px;
+  height: 44px;
+
+  background:
+    radial-gradient(circle,
+      white 0 4px,
+      transparent 5px);
+
+  background-size:
+    20px 20px;
+
+  filter:
+    drop-shadow(0 0 9px white);
+}
+
+.light-one {
+  left: 75px;
+}
+
+.light-two {
+  right: 75px;
+}
+
+/* TOPO */
+
+.top-ui {
+  position: relative;
+
+  z-index: 30;
+
+  height: 110px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content:
+    space-between;
+
+  padding: 13px 17px;
+}
+
+.round-button {
+  width: 45px;
+  height: 45px;
+
+  border: 3px solid white;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(#ffc94f,
+      #ef9308);
+
+  color: white;
+
+  font-size: 27px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 4px 0 #bf6f00;
+
+  cursor: pointer;
+}
+
+.round-counter {
+  position: absolute;
+
+  top: 16px;
+  left: 68px;
+
+  background:
+    linear-gradient(#44dd52,
+      #16982c);
+
+  color: white;
+
+  padding:
+    3px 10px;
+
+  border-radius: 999px;
+
+  border:
+    3px solid white;
+
+  font-size: 19px;
+
+  font-weight: 800;
+}
+
+/* PLACAR */
+
+.main-score {
+  position: absolute;
+
+  left: 50%;
+  top: 9px;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+  align-items: center;
+
+  z-index: 40;
+}
+
+.score-avatar {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  border:
+    4px solid #ffd452;
+
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.blue-avatar {
+  background: #2794ff;
+}
+
+.red-avatar {
+  background: #f34b3c;
+}
+
+.score-box {
+  min-width: 260px;
+
+  margin: 0 -6px;
+
+  text-align: center;
+
+  border-radius: 15px;
+
+  border:
+    4px solid #ffd452;
+
+  background:
+    linear-gradient(#915aff,
+      #6635d7);
+
+  padding:
+    2px 22px 4px;
+
+  color: white;
+
+  box-shadow:
+    0 6px 0 #5221ae;
+}
+
+.game-time {
+  color: #ffef72;
+
+  font-weight: 800;
+
+  font-size: 14px;
+}
+
+.score-values {
+  display: flex;
+
+  justify-content:
+    center;
+
+  align-items: center;
+
+  gap: 22px;
+
+  line-height: 30px;
+}
+
+.score-values strong {
+  font-size: 32px;
+}
+
+.score-values span {
+  color:
+    rgba(255,
+      255,
+      255,
+      0.65);
+
+  font-size: 20px;
+}
+
+.score-caption {
+  font-size: 9px;
+
+  letter-spacing:
+    1.5px;
+
+  color: #eadcff;
+}
+
+/* PROPAGANDA */
+
+.ad-board {
+  height: 35px;
+
+  margin-top: 55px;
+
+  display: flex;
+
+  justify-content:
+    space-around;
+
+  align-items: center;
+
+  color: #ffd85d;
+
+  font-weight: 800;
+
+  font-size: 18px;
+
+  background:
+    linear-gradient(90deg,
+      rgba(224,
+        132,
+        17,
+        0.8),
+      rgba(241,
+        172,
+        35,
+        0.65),
+      rgba(224,
+        132,
+        17,
+        0.8));
+
+  border-top:
+    3px solid #f8ca4f;
+
+  border-bottom:
+    3px solid #db8e17;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+/* CAMPO */
+
+.field {
+  position: relative;
+
+  width: 100%;
+  height: 520px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(#56d13d,
+      #10a63c);
+}
+
+.grass-pattern {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.2;
+
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent 110px,
+      rgba(255,
+        255,
+        255,
+        0.17) 110px,
+      rgba(255,
+        255,
+        255,
+        0.17) 220px);
+}
+
+.field-ground-line {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 410px;
+
+  height: 5px;
+
+  background:
+    rgba(255,
+      255,
+      255,
+      0.85);
+}
+
+/* LINHAS */
+
+.center-line {
+  position: absolute;
+
+  left: 50%;
+  top: 140px;
+  bottom: 110px;
+
+  width: 4px;
+
+  background:
+    rgba(255,
+      255,
+      255,
+      0.9);
+}
+
+.center-circle {
+  position: absolute;
+
+  width: 145px;
+  height: 145px;
+
+  left: 50%;
+  top: 285px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border:
+    4px solid rgba(255,
+      255,
+      255,
+      0.9);
+
+  border-radius: 50%;
+}
+
+.center-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+}
+
+.penalty-area {
+  position: absolute;
+
+  top: 250px;
+
+  width: 120px;
+  height: 160px;
+
+  border:
+    4px solid rgba(255,
+      255,
+      255,
+      0.9);
+}
+
+.penalty-left {
+  left: 0;
+
+  border-left: none;
+}
+
+.penalty-right {
+  right: 0;
+
+  border-right: none;
+}
+
+/* GOLS */
+
+.goal {
+  position: absolute;
+
+  top: 235px;
+
+  width: 65px;
+  height: 175px;
+
+  border:
+    6px solid white;
+
+  z-index: 6;
+}
+
+.goal-left {
+  left: 0;
+
+  border-left: none;
+}
+
+.goal-right {
+  right: 0;
+
+  border-right: none;
+}
+
+.goal-net {
+  width: 100%;
+  height: 100%;
+
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent 10px,
+      rgba(255,
+        255,
+        255,
+        0.55) 10px,
+      rgba(255,
+        255,
+        255,
+        0.55) 12px),
+    repeating-linear-gradient(0deg,
+      transparent 0,
+      transparent 10px,
+      rgba(255,
+        255,
+        255,
+        0.55) 10px,
+      rgba(255,
+        255,
+        255,
+        0.55) 12px);
+}
+
+/* JOGADOR */
+
+.player {
+  position: absolute;
+
+  width: 72px;
+  height: 105px;
+
+  z-index: 12;
+
+  transform-origin:
+    center center;
+}
+
+.player-name {
+  position: absolute;
+
+  left: 50%;
+  top: -27px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    rgba(15,
+      23,
+      42,
+      0.8);
+
+  border:
+    2px solid rgba(255,
+      255,
+      255,
+      0.5);
+
+  border-radius: 999px;
+
+  padding: 2px 8px;
+
+  color: white;
+
+  white-space: nowrap;
+
+  font-size: 11px;
+
+  z-index: 20;
+}
+
+.character {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* CABEÇA */
+
+.character-head {
+  position: absolute;
+
+  left: 9px;
+  top: 2px;
+
+  width: 56px;
+  height: 56px;
+
+  border-radius:
+    48% 52% 47% 53%;
+
+  background:
+    linear-gradient(140deg,
+      #ffd3a2,
+      #e99a61);
+
+  border:
+    3px solid #4d291c;
+
+  z-index: 6;
+
+  box-shadow:
+    inset -7px -5px rgba(138,
+      65,
+      33,
+      0.15);
+}
+
+/* CABELO */
+
+.hair {
+  position: absolute;
+
+  left: 9px;
+  top: -1px;
+
+  width: 55px;
+  height: 28px;
+
+  background: #302019;
+
+  border-radius:
+    60% 55% 25% 25%;
+
+  z-index: 8;
+
+  transform:
+    rotate(-4deg);
+
+  clip-path:
+    polygon(0 50%,
+      10% 8%,
+      23% 25%,
+      35% 0,
+      48% 24%,
+      63% 4%,
+      78% 27%,
+      100% 17%,
+      96% 76%,
+      2% 72%);
+}
+
+.eye {
+  position: absolute;
+
+  top: 25px;
+
+  width: 6px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #262626;
+}
+
+.eye-one {
+  left: 14px;
+}
+
+.eye-two {
+  left: 34px;
+}
+
+.nose {
+  position: absolute;
+
+  width: 7px;
+  height: 5px;
+
+  left: 26px;
+  top: 34px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(155,
+      72,
+      45,
+      0.4);
+}
+
+.mouth {
+  position: absolute;
+
+  width: 15px;
+  height: 6px;
+
+  left: 23px;
+  top: 43px;
+
+  border-bottom:
+    3px solid #8c3e32;
+
+  border-radius: 50%;
+}
+
+.ear {
+  position: absolute;
+
+  width: 11px;
+  height: 15px;
+
+  right: -7px;
+  top: 25px;
+
+  border-radius: 50%;
+
+  background: #e99a61;
+
+  border:
+    2px solid #4d291c;
+}
+
+.neck {
+  position: absolute;
+
+  left: 30px;
+  top: 54px;
+
+  width: 15px;
+  height: 14px;
+
+  background: #df9460;
+
+  z-index: 4;
+}
+
+/* CAMISA */
+
+.shirt {
+  position: absolute;
+
+  left: 17px;
+  top: 60px;
+
+  width: 41px;
+  height: 33px;
+
+  border-radius:
+    11px 11px 7px 7px;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-weight: 800;
+
+  border:
+    2px solid rgba(255,
+      255,
+      255,
+      0.9);
+}
+
+.blue .shirt {
+  background:
+    linear-gradient(#48b6ff,
+      #0576e9);
+}
+
+.red .shirt {
+  background:
+    linear-gradient(#ff7a48,
+      #ec3329);
+}
+
+.leg {
+  position: absolute;
+
+  width: 10px;
+  height: 16px;
+
+  top: 88px;
+
+  background: #e99a61;
+
+  z-index: 3;
+}
+
+.leg-left {
+  left: 22px;
+}
+
+.leg-right {
+  left: 43px;
+}
+
+.shoe {
+  position: absolute;
+
+  width: 24px;
+  height: 10px;
+
+  top: 98px;
+
+  border-radius:
+    8px 12px 5px 5px;
+
+  background: #262b38;
+
+  z-index: 7;
+}
+
+.shoe-left {
+  left: 14px;
+}
+
+.shoe-right {
+  left: 38px;
+}
+
+/* PERNA DE CHUTE */
+
+.kick-leg {
+  position: absolute;
+
+  left: 46px;
+  top: 78px;
+
+  width: 11px;
+  height: 30px;
+
+  background: #e99a61;
+
+  border-radius: 8px;
+
+  transform-origin:
+    top center;
+
+  opacity: 0;
+
+  z-index: 8;
+}
+
+.kick-shoe {
+  position: absolute;
+
+  width: 26px;
+  height: 11px;
+
+  bottom: -3px;
+  left: -2px;
+
+  border-radius:
+    10px;
+
+  background: #252a36;
+}
+
+.player.kicking .kick-leg {
+  opacity: 1;
+
+  animation:
+    kickAnimation 0.16s alternate infinite;
+}
+
+.player.kicking .shoe-right,
+.player.kicking .leg-right {
+  opacity: 0;
+}
+
+@keyframes kickAnimation {
+  from {
+    transform:
+      rotate(10deg);
+  }
+
+  to {
+    transform:
+      rotate(-75deg);
+  }
+}
+
+/* BOLA */
+
+.ball {
+  position: absolute;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 39px;
+
+  z-index: 15;
+
+  filter:
+    drop-shadow(0 9px 5px rgba(0,
+        0,
+        0,
+        0.3));
+}
+
+/* GOAL */
+
+.goal-title {
+  position: absolute;
+
+  left: 50%;
+  top: 170px;
+
+  transform:
+    translateX(-50%) rotate(-3deg);
+
+  z-index: 80;
+
+  color: #ffc746;
+
+  font-size:
+    clamp(68px,
+      12vw,
+      135px);
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -4px;
+
+  -webkit-text-stroke:
+    6px #744314;
+
+  text-shadow:
+    0 7px 0 #d0831b,
+    0 15px 20px rgba(0,
+      0,
+      0,
+      0.28);
+
+  animation:
+    goalAnimation 0.35s ease-out;
+}
+
+@keyframes goalAnimation {
+  from {
+    transform:
+      translateX(-50%) scale(0.3) rotate(-10deg);
+  }
+
+  70% {
+    transform:
+      translateX(-50%) scale(1.15) rotate(2deg);
+  }
+
+  to {
+    transform:
+      translateX(-50%) scale(1) rotate(-3deg);
+  }
+}
+
+/* CONFETE */
+
+.confetti {
+  position: absolute;
+
+  inset: 120px 15% auto;
+
+  height: 220px;
+
+  z-index: 70;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 5% 20%,
+      #ffc400 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 15% 60%,
+      #ff7139 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 25% 25%,
+      #fdeb38 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 36% 70%,
+      #ff8a26 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 50% 20%,
+      #ffdd2e 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 62% 68%,
+      #ff822b 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 75% 25%,
+      #ffce31 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 87% 58%,
+      #ff7128 0 4px,
+      transparent 5px),
+    radial-gradient(circle at 96% 15%,
+      #ffe340 0 4px,
+      transparent 5px);
+}
+
+/* FIM */
+
+.winner-screen {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 200;
+
+  background:
+    rgba(16,
+      28,
+      67,
+      0.83);
+
+  backdrop-filter:
+    blur(8px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content:
+    center;
+
+  align-items: center;
+
+  color: white;
+}
+
+.winner-screen h2 {
+  font-size:
+    clamp(40px,
+      8vw,
+      85px);
+
+  margin: 0;
+}
+
+.winner-screen>div {
+  font-size: 45px;
+}
+
+.winner-screen button {
+  margin-top: 25px;
+
+  padding:
+    12px 24px;
+
+  border: 4px solid white;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(#ffca53,
+      #ee9211);
+
+  color: white;
+
+  font-size: 20px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+/* CONTROLES TOUCH */
+
+.mobile-controls {
+  position: absolute;
+
+  bottom: 95px;
+
+  left: 25px;
+  right: 25px;
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  z-index: 50;
+
+  pointer-events: none;
+}
+
+.touch-player,
+.touch-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  pointer-events: auto;
+}
+
+.touch-player>span {
+  color: white;
+
+  font-weight: 800;
+}
+
+.mobile-controls button {
+  width: 70px;
+  height: 58px;
+
+  border-radius: 15px;
+
+  border: 4px solid white;
+
+  color: white;
+
+  background:
+    linear-gradient(#ffc84e,
+      #ee9616);
+
+  font-size: 29px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 5px 0 #bd6e00;
+
+  cursor: pointer;
+}
+
+.mobile-controls button:active {
+  transform:
+    translateY(4px);
+
+  box-shadow:
+    0 1px 0 #bd6e00;
+}
+
+/* NOMES */
+
+.player-list {
+  position: absolute;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  bottom: 17px;
+
+  width: min(680px,
+      calc(100% - 30px));
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,
+      1fr);
+
+  gap: 7px;
+
+  z-index: 55;
+}
+
+.player-card {
+  min-width: 0;
+
+  height: 59px;
+
+  border-radius: 12px;
+
+  padding: 7px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: white;
+
+  background:
+    rgba(19,
+      34,
+      70,
+      0.88);
+
+  border:
+    2px solid rgba(255,
+      255,
+      255,
+      0.35);
+
+  backdrop-filter:
+    blur(5px);
+}
+
+.card-number {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  font-weight: 800;
+}
+
+.player-card.blue .card-number {
+  background: #1787ef;
+}
+
+.player-card.red .card-number {
+  background: #ed4437;
+}
+
+.player-card>div:nth-child(2) {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.player-card strong {
+  display: block;
+
+  font-size: 12px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow:
+    ellipsis;
+}
+
+.player-card span {
+  display: block;
+
+  color: #b9c8e6;
+
+  font-size: 9px;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #3de066;
+
+  box-shadow:
+    0 0 8px #3de066;
+}
+
+/* TECLADO */
+
+.keyboard-controls {
+  position: absolute;
+
+  bottom: 79px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  gap: 6px;
+
+  z-index: 45;
+}
+
+.keyboard-controls span {
+  background:
+    rgba(10,
+      22,
+      47,
+      0.72);
+
+  color: white;
+
+  padding:
+    3px 7px;
+
+  border-radius: 6px;
+
+  font-size: 8px;
+}
+
+.keyboard-controls strong {
+  color: #ffd34c;
+
+  margin-right: 4px;
+}
+
+.multiplayer-status {
+  position: absolute;
+
+  top: 115px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 100;
+
+  display: flex;
+  gap: 18px;
+
+  padding: 7px 16px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(15, 23, 42, 0.82);
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  backdrop-filter: blur(8px);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 750px) {
+
+  .score-box {
+    min-width: 180px;
+
+    padding:
+      2px 10px;
+  }
+
+  .score-avatar {
+    width: 47px;
+    height: 47px;
+  }
+
+  .player-list {
+    grid-template-columns:
+      repeat(2,
+        1fr);
+
+    bottom: 10px;
+  }
+
+  .keyboard-controls {
+    display: none;
+  }
+
+  .ad-board {
+    font-size: 12px;
+  }
+
+  .ad-board span:first-child,
+  .ad-board span:last-child {
+    display: none;
+  }
+
+  .mobile-controls {
+    bottom: 145px;
+  }
+
+
+}
+
+.name-screen {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(180deg,
+      rgba(30, 90, 210, 0.96),
+      rgba(12, 115, 61, 0.96));
+}
+
+.name-box {
+  width: min(420px, 90%);
+
+  padding: 35px;
+
+  text-align: center;
+
+  border-radius: 25px;
+
+  background:
+    rgba(21, 35, 73, 0.94);
+
+  border:
+    4px solid white;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.name-box h1 {
+  margin: 0 0 10px;
+
+  color: #ffc83d;
+
+  font-size: 42px;
+}
+
+.name-box p {
+  color: white;
+}
+
+.name-box input {
+  width: 100%;
+
+  padding: 14px;
+
+  margin: 18px 0;
+
+  border-radius: 12px;
+
+  border: 3px solid #ffffff;
+
+  outline: none;
+
+  font-size: 17px;
+}
+
+.name-box button {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 3px solid white;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(#ffc94e,
+      #ed9513);
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
