@@ -58,9 +58,34 @@ async function sendGameEvent(event, data = {}) {
 const app = express();
 
 app.use(cors());
+
+app.use(express.json());
+
 app.use(express.static(
     path.join(__dirname, "../dist")
 ));
+
+app.post(
+    "/api/game-event",
+    async (req, res) => {
+        const { event, data } = req.body;
+
+        if (!event) {
+            return res.status(400).json({
+                error: "Evento não informado",
+            });
+        }
+
+        await sendGameEvent(
+            event,
+            data || {}
+        );
+
+        return res.json({
+            success: true,
+        });
+    }
+);
 
 const server = http.createServer(app);
 
@@ -151,7 +176,10 @@ function createPlayer(id, socketId) {
         right: false,
         jump: false,
         kick: false,
-        facing: position.team === "blue" ? 1 : -1,
+        facing:
+            position.team === "blue"
+                ? 1
+                : -1,
     };
 }
 
@@ -237,11 +265,16 @@ io.on("connection", (socket) => {
         `Jogador ${playerId} conectado`
     );
 
-    sendGameEvent("PLAYER_JOINED", {
-        playerId,
-        playerName: player.name,
-        team: player.team,
-    });
+    sendGameEvent(
+        "PLAYER_JOINED",
+        {
+            playerId,
+            playerName:
+                player.name,
+            team:
+                player.team,
+        }
+    );
 
     socket.emit(
         "player-assigned",
@@ -260,22 +293,27 @@ io.on("connection", (socket) => {
 
             if (!id) return;
 
-            const safeName = String(
-                name
-            )
-                .trim()
-                .slice(0, 20);
+            const safeName =
+                String(name)
+                    .trim()
+                    .slice(0, 20);
 
             if (!safeName) return;
 
             players[id].name =
                 safeName;
 
-            sendGameEvent("PLAYER_NAME_SET", {
-                playerId: id,
-                playerName: safeName,
-                team: players[id].team,
-            });
+            sendGameEvent(
+                "PLAYER_NAME_SET",
+                {
+                    playerId: id,
+                    playerName:
+                        safeName,
+                    team:
+                        players[id]
+                            .team,
+                }
+            );
 
             emitGameState();
         }
@@ -344,10 +382,15 @@ io.on("connection", (socket) => {
                 `Jogador ${id} saiu`
             );
 
-            sendGameEvent("PLAYER_LEFT", {
-                playerId: id,
-                playerName: players[id]?.name,
-            });
+            sendGameEvent(
+                "PLAYER_LEFT",
+                {
+                    playerId: id,
+                    playerName:
+                        players[id]
+                            ?.name,
+                }
+            );
 
             delete players[id];
 
@@ -366,30 +409,39 @@ function updatePlayers() {
             let vx = 0;
 
             if (player.left) {
-                vx = -MOVE_SPEED;
-                player.facing = -1;
+                vx =
+                    -MOVE_SPEED;
+
+                player.facing =
+                    -1;
             }
 
             if (player.right) {
-                vx = MOVE_SPEED;
-                player.facing = 1;
+                vx =
+                    MOVE_SPEED;
+
+                player.facing =
+                    1;
             }
 
             if (
                 player.jump &&
                 player.y >=
-                PLAYER_GROUND_Y - 1
+                PLAYER_GROUND_Y -
+                1
             ) {
                 player.vy =
                     JUMP_FORCE;
 
-                player.jump = false;
+                player.jump =
+                    false;
             }
 
             player.vy += 0.62;
 
             player.x += vx;
-            player.y += player.vy;
+            player.y +=
+                player.vy;
 
             player.vx = vx;
 
@@ -461,7 +513,8 @@ function updateBall() {
 
             const py =
                 player.y +
-                PLAYER_HEIGHT / 2;
+                PLAYER_HEIGHT /
+                2;
 
             const bx =
                 ball.x +
@@ -471,8 +524,11 @@ function updateBall() {
                 ball.y +
                 BALL_SIZE / 2;
 
-            const dx = bx - px;
-            const dy = by - py;
+            const dx =
+                bx - px;
+
+            const dy =
+                by - py;
 
             const distance =
                 Math.sqrt(
@@ -518,8 +574,7 @@ function updateBall() {
 
             if (
                 player.kick &&
-                distance <
-                105
+                distance < 105
             ) {
                 ball.vx =
                     player.facing *
@@ -563,40 +618,53 @@ function checkGoals() {
     if (leftGoal) {
         redScore++;
 
-        sendGameEvent("GOAL", {
-            team: "red",
-            blueScore,
-            redScore,
-        });
+        sendGameEvent(
+            "GOAL",
+            {
+                team: "red",
+                blueScore,
+                redScore,
+            }
+        );
 
-        io.emit("goal", {
-            team: "red",
-        });
+        io.emit(
+            "goal",
+            {
+                team: "red",
+            }
+        );
 
         resetGamePositions();
+
         return;
     }
 
     if (rightGoal) {
         blueScore++;
 
-        sendGameEvent("GOAL", {
-            team: "blue",
-            blueScore,
-            redScore,
-        });
+        sendGameEvent(
+            "GOAL",
+            {
+                team: "blue",
+                blueScore,
+                redScore,
+            }
+        );
 
-        io.emit("goal", {
-            team: "blue",
-        });
+        io.emit(
+            "goal",
+            {
+                team: "blue",
+            }
+        );
 
         resetGamePositions();
+
         return;
     }
 
     if (ball.x < 10) {
         ball.x = 10;
-
         ball.vx *= -0.76;
     }
 
@@ -617,7 +685,9 @@ function checkGoals() {
 
 setInterval(() => {
     updatePlayers();
+
     updateBall();
+
     checkGoals();
 
     emitGameState();
@@ -625,7 +695,11 @@ setInterval(() => {
 
 app.get("/{*splat}", (req, res) => {
     res.sendFile(
-        path.join(__dirname, "../dist", "index.html")
+        path.join(
+            __dirname,
+            "../dist",
+            "index.html"
+        )
     );
 });
 
